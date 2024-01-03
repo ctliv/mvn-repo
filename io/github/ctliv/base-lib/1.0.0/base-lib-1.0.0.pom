@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>base-lib</artifactId>
+    <name>Base library</name>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>io.github.ctliv</groupId>
+        <artifactId>base-lib-pom</artifactId>
+        <version>1.0.0</version>
+        <relativePath/>
+    </parent>
+
+    <dependencies>
+        <!-- https://github.com/ronmamo/reflections -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+        </dependency>
+
+        <!-- https://github.com/jOOQ/jOOR
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>joor</artifactId>
+            <version>0.9.14</version>
+        </dependency>
+        -->
+
+        <!-- https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#io.caching.provider.jcache -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-jcache</artifactId>
+        </dependency>
+
+        <!-- Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+
+        <!-- Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Commons: https://commons.apache.org/proper/commons-lang/ -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!-- Commons: https://commons.apache.org/proper/commons-io/ -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <!-- Data -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- https://github.com/ulid/spec
+             https://github.com/azam/ulidj -->
+        <dependency>
+            <groupId>io.azam.ulidj</groupId>
+            <artifactId>ulidj</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.ctliv</groupId>
+            <artifactId>event-bus-aware-addon</artifactId>
+        </dependency>
+
+        <!-- UI: https://vaadin.com/directory/component/crud-ui-add-on -->
+        <dependency>
+            <groupId>org.vaadin.crudui</groupId>
+            <artifactId>crudui</artifactId>
+        </dependency>
+
+        <!-- UI: https://vaadin.com/directory/component/file-download-wrapper -->
+        <dependency>
+            <groupId>org.vaadin.olli</groupId>
+            <artifactId>file-download-wrapper</artifactId>
+        </dependency>
+    </dependencies>
+</project>
