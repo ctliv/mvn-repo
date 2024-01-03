@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>auth-mod</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>io.github.ctliv</groupId>
+        <artifactId>base-lib-pom</artifactId>
+        <version>1.0.0</version>
+        <relativePath/>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- http://www.passay.org/ -->
+        <dependency>
+            <groupId>org.passay</groupId>
+            <artifactId>passay</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.ctliv</groupId>
+            <artifactId>base-mod</artifactId>
+        </dependency>
+    </dependencies>
+</project>
