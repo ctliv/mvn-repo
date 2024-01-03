@@ -10,7 +10,7 @@
 
     <parent>
         <groupId>io.github.ctliv</groupId>
-        <artifactId>base-lib-pom</artifactId>
+        <artifactId>base-mod-pom</artifactId>
         <version>1.0.0</version>
         <relativePath/>
     </parent>
