@@ -5,7 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>base-mod-pom</artifactId>
+    <name>Base Mod POM</name>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>io.github.ctliv</groupId>
