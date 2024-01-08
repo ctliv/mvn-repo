@@ -54,7 +54,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-<!--
         <repository>
             <id>${private.repo.server}</id>
             <name>ctliv private maven repo</name>
@@ -66,7 +65,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
--->
     </repositories>
 
     <pluginRepositories>
