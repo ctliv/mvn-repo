@@ -105,7 +105,7 @@
                                     <arguments>
                                         <argument>/c</argument>
                                         <argument>\"${bash.local.path}\"</argument>
-                                        <argument>\"${project.basedir}/${docker.build.script}\"</argument>
+                                        <argument>${project.basedir}/${docker.build.script}</argument>
                                         <argument>ctliv/${project.artifactId}</argument>
                                         <argument>${project.version}</argument>
                                         <argument>${docker.build.options}</argument>
@@ -124,7 +124,7 @@
                                     <arguments>
                                         <argument>/c</argument>
                                         <argument>\"${bash.local.path}\"</argument>
-                                        <argument>\"${project.basedir}/${docker.build.script}\"</argument>
+                                        <argument>${project.basedir}/${docker.build.script}</argument>
                                         <argument>ctliv/${project.artifactId}</argument>
                                         <argument>${project.version}</argument>
                                         <argument>${docker.build.options}</argument>
