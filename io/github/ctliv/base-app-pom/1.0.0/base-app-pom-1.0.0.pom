@@ -113,7 +113,7 @@
                                 </configuration>
                             </execution>
                             <execution>
-                                <id>test</id>
+                                <id>build-test</id>
                                 <phase>deploy</phase>
                                 <goals>
                                     <goal>exec</goal>
@@ -123,7 +123,7 @@
                                     <workingDirectory>${project.basedir}</workingDirectory>
                                     <arguments>
                                         <argument>/c</argument>
-                                        <argument>"${bash.local.path}"</argument>
+                                        <argument>\"${bash.local.path}\"</argument>
                                         <argument>${project.basedir}/${docker.build.script}</argument>
                                         <argument>ctliv/${project.artifactId}</argument>
                                         <argument>${project.version}</argument>
