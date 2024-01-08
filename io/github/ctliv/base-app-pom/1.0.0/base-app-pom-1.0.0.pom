@@ -67,7 +67,7 @@
             <properties>
                 <bash.local.path>"${env.GIT_HOME}/bin/bash.exe"</bash.local.path>
                 <docker.build.script>script/ui-build.sh</docker.build.script>
-                <docker.build.options>""</docker.build.options>
+                <docker.build.options> </docker.build.options>
             </properties>
 
             <build>
