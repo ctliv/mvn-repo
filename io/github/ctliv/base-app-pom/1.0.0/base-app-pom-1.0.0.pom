@@ -55,6 +55,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
 
+<!--
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
@@ -63,6 +64,7 @@
                     <optional>true</optional>
                 </dependency>
             </dependencies>
+-->
 
             <properties>
                 <bash.local.path>${env.GIT_HOME}/bin/bash.exe</bash.local.path>
@@ -140,6 +142,7 @@
         <profile>
             <id>dev</id>
 
+<!--
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
@@ -148,6 +151,7 @@
                     <optional>true</optional>
                 </dependency>
             </dependencies>
+-->
 
             <build>
                 <plugins>
