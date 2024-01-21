@@ -13,13 +13,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.1</version>
+        <version>3.2.2</version>
         <relativePath/>
     </parent>
 
     <properties>
         <java.version>21</java.version>
-        <vaadin.version>24.3.2</vaadin.version>
+        <vaadin.version>24.3.3</vaadin.version>
 
         <public.repo.server>github</public.repo.server>
         <private.repo.server>privaterepo</private.repo.server>
