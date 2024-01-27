@@ -55,7 +55,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
 
-<!--
+<!--        Disabled due to: https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.devtools.diagnosing-classloading-issues
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
@@ -142,7 +142,7 @@
         <profile>
             <id>dev</id>
 
-<!--
+<!--        Disabled due to: https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.devtools.diagnosing-classloading-issues
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
@@ -305,6 +305,10 @@
                                 <phase>compile</phase>
                             </execution>
                         </executions>
+                        <configuration>
+                            <!-- See: https://stackoverflow.com/questions/76636685/some-vaadin-components-not-rendered-after-upgrading-from-v22-to-v24 -->
+                            <optimizeBundle>false</optimizeBundle>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
