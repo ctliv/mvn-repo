@@ -50,6 +50,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Commons: https://commons.apache.org/proper/commons-lang/ -->
         <dependency>
             <groupId>org.apache.commons</groupId>
