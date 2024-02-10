@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.ctliv</groupId>
+    <artifactId>base-bundle-pom</artifactId>
+    <name>Base Bundle POM</name>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <repositories>
+        <repository>
+            <id>publicrepo</id>
+            <name>ctliv public maven repo</name>
+            <url>https://raw.githubusercontent.com/ctliv/mvn-repo/main</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>publicrepo</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>repo.deploy</name>
+                    <value>public</value>
+                </property>
+            </activation>
+
+            <!-- https://www.baeldung.com/maven-repo-github -->
+            <distributionManagement>
+                <repository>
+                    <id>internal.repo</id>
+                    <name>Temporary Staging Repository</name>
+                    <url>file://${project.build.directory}/mvn-artifact</url>
+                </repository>
+            </distributionManagement>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>2.8.2</version>
+                        <configuration>
+                            <!-- Use this to disable
+                            <skip>true</skip>
+                            -->
+                            <!-- See: https://maven.apache.org/plugins/maven-deploy-plugin/deploy-mojo.html#altDeploymentRepository -->
+                            <altDeploymentRepository>
+                                internal.repo::default::file://${project.build.directory}/mvn-artifact
+                            </altDeploymentRepository>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.github</groupId>
+                        <artifactId>site-maven-plugin</artifactId>
+                        <version>0.12</version>
+                        <configuration>
+                            <message>Artifacts for ${project.artifactId}:${project.version}</message>
+                            <noJekyll>false</noJekyll>
+                            <dryRun>false</dryRun>
+                            <outputDirectory>${project.build.directory}/mvn-artifact</outputDirectory>
+                            <branch>refs/heads/main</branch>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <merge>true</merge>
+                            <repositoryName>mvn-repo</repositoryName>
+                            <repositoryOwner>ctliv</repositoryOwner>
+                            <server>github</server>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>site</goal>
+                                </goals>
+                                <phase>deploy</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
