@@ -1,142 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.github.ctliv</groupId>
-  <artifactId>base-app-archetype</artifactId>
-  <version>1.0.0</version>
-  <packaging>maven-archetype</packaging>
+    <groupId>io.github.ctliv</groupId>
+    <artifactId>base-app-archetype</artifactId>
+    <version>1.0.0</version>
+    <packaging>maven-archetype</packaging>
 
-  <name>Archetype for basic app</name>
+    <name>Archetype for basic app</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-  <build>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.archetype</groupId>
-        <artifactId>archetype-packaging</artifactId>
-        <version>3.2.1</version>
-      </extension>
-    </extensions>
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.archetype</groupId>
+                <artifactId>archetype-packaging</artifactId>
+                <version>3.2.1</version>
+            </extension>
+        </extensions>
 
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-archetype-plugin</artifactId>
-          <version>3.2.1</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>3.2.1</version>
+                    <configuration>
+                        <useDefaultExcludes>false</useDefaultExcludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-  <description>Parent pom providing dependency and plugin management for applications built with Maven</description>
+    <description>Parent pom providing dependency and plugin management for applications built with Maven</description>
 
-  <url>https://github.com/ctliv/</url>
+    <url>https://github.com/ctliv/</url>
 
-  <developers>
-    <developer>
-      <name>Cristiano Toncelli</name>
-      <email>ct.livorno@gmail.com</email>
-      <organization>CT LIV</organization>
-      <organizationUrl>https://github.com/ctliv/</organizationUrl>
-    </developer>
-  </developers>
+    <developers>
+        <developer>
+            <name>Cristiano Toncelli</name>
+            <email>ct.livorno@gmail.com</email>
+            <organization>CT LIV</organization>
+            <organizationUrl>https://github.com/ctliv/</organizationUrl>
+        </developer>
+    </developers>
 
-  <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <url>https://www.apache.org/licenses/LICENSE-2.0</url>
-    </license>
-  </licenses>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
 
-  <scm>
-    <url>https://github.com/ctliv/archetype-app</url>
-  </scm>
+    <scm>
+        <url>https://github.com/ctliv/archetype-app</url>
+    </scm>
 
-  <profiles>
-    <profile>
-      <id>privaterepo</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>repo.deploy</name>
-          <value>private</value>
-        </property>
-      </activation>
+    <profiles>
+        <profile>
+            <id>privaterepo</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>repo.deploy</name>
+                    <value>private</value>
+                </property>
+            </activation>
 
-      <distributionManagement>
-        <repository>
-          <id>${private.repo.server}</id>
-          <name>GitHub OWNER Apache Maven Packages</name>
-          <url>https://maven.pkg.github.com/ctliv/mvn-private-repo</url>
-        </repository>
-      </distributionManagement>
-    </profile>
+            <distributionManagement>
+                <repository>
+                    <id>${private.repo.server}</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/ctliv/mvn-private-repo</url>
+                </repository>
+            </distributionManagement>
+        </profile>
 
-    <profile>
-      <id>publicrepo</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-        <property>
-          <name>repo.deploy</name>
-          <value>public</value>
-        </property>
-      </activation>
+        <profile>
+            <id>publicrepo</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>repo.deploy</name>
+                    <value>public</value>
+                </property>
+            </activation>
 
-      <!-- https://www.baeldung.com/maven-repo-github -->
-      <distributionManagement>
-        <repository>
-          <id>internal.repo</id>
-          <name>Temporary Staging Repository</name>
-          <url>file://${project.build.directory}/mvn-artifact</url>
-        </repository>
-      </distributionManagement>
+            <!-- https://www.baeldung.com/maven-repo-github -->
+            <distributionManagement>
+                <repository>
+                    <id>internal.repo</id>
+                    <name>Temporary Staging Repository</name>
+                    <url>file://${project.build.directory}/mvn-artifact</url>
+                </repository>
+            </distributionManagement>
 
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-deploy-plugin</artifactId>
-            <version>3.1.1</version>
-            <configuration>
-              <altDeploymentRepository>
-                internal.repo::default::file://${project.build.directory}/mvn-artifact
-              </altDeploymentRepository>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>com.github.github</groupId>
-            <artifactId>site-maven-plugin</artifactId>
-            <version>0.12</version>
-            <configuration>
-              <message>Artifacts for ${project.artifactId}:${project.version}</message>
-              <noJekyll>false</noJekyll>
-              <dryRun>false</dryRun>
-              <outputDirectory>${project.build.directory}/mvn-artifact</outputDirectory>
-              <branch>refs/heads/main</branch>
-              <includes>
-                <include>**/*</include>
-              </includes>
-              <merge>true</merge>
-              <repositoryName>mvn-repo</repositoryName>
-              <repositoryOwner>ctliv</repositoryOwner>
-              <server>github</server>
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>site</goal>
-                </goals>
-                <phase>deploy</phase>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <configuration>
+                            <altDeploymentRepository>
+                                internal.repo::default::file://${project.build.directory}/mvn-artifact
+                            </altDeploymentRepository>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.github</groupId>
+                        <artifactId>site-maven-plugin</artifactId>
+                        <version>0.12</version>
+                        <configuration>
+                            <message>Artifacts for ${project.artifactId}:${project.version}</message>
+                            <noJekyll>false</noJekyll>
+                            <dryRun>false</dryRun>
+                            <outputDirectory>${project.build.directory}/mvn-artifact</outputDirectory>
+                            <branch>refs/heads/main</branch>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <merge>true</merge>
+                            <repositoryName>mvn-repo</repositoryName>
+                            <repositoryOwner>ctliv</repositoryOwner>
+                            <server>github</server>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>site</goal>
+                                </goals>
+                                <phase>deploy</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
