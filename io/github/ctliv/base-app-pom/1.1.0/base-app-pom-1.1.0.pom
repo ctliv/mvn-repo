@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>base-app-pom</artifactId>
+    <name>Base App POM</name>
+    <version>1.1.0</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>io.github.ctliv</groupId>
+        <artifactId>base-lib-pom</artifactId>
+        <version>1.1.0</version>
+        <relativePath/>
+    </parent>
+
+    <dependencies>
+        <!-- See: https://www.baeldung.com/ops/docker-compose-support-spring-boot
+             See: https://howtodoinjava.com/spring-boot/spring-boot-docker-compose/ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-docker-compose</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>spring-boot:run</defaultGoal>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- Make sure `mvn spring-boot:build-image` uses the Java version defined in this project -->
+                    <!-- See: https://stackoverflow.com/questions/68474907/mvn-build-image-dial-tcp-lookup-github-com-temporary-failure-in-name-resolu -->
+                    <image>
+                        <env>
+                            <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+                            <BP_JVM_TYPE>JRE</BP_JVM_TYPE>
+                        </env>
+                    </image>
+                    <wait>500</wait>
+                    <maxAttempts>240</maxAttempts>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>ide</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+<!--        Disabled due to: https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.devtools.diagnosing-classloading-issues
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                    <scope>runtime</scope>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+-->
+
+            <properties>
+                <bash.local.path>${env.GIT_HOME}/bin/bash.exe</bash.local.path>
+                <docker.build.script>script/ui-build.sh</docker.build.script>
+                <docker.build.options> </docker.build.options>
+            </properties>
+
+            <build>
+                <plugins>
+                    <!--
+                        Take care of synchronizing java dependencies and imports in
+                        package.json and main.js files.
+                        It also creates vite.config.js if not exists yet.
+                    -->
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin-maven-plugin</artifactId>
+                        <version>${vaadin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-frontend</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>ui-build</id>
+                                <configuration>
+                                    <executable>cmd</executable>
+                                    <workingDirectory>${project.basedir}</workingDirectory>
+                                    <arguments>
+                                        <argument>/c</argument>
+                                        <argument>"${bash.local.path}"</argument>
+                                        <argument>${project.basedir}/${docker.build.script}</argument>
+                                        <argument>ctliv/${project.artifactId}</argument>
+                                        <argument>${project.version}</argument>
+                                        <argument>${docker.build.options}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ui-build-dryrun</id>
+                                <configuration>
+                                    <executable>echo</executable>
+                                    <workingDirectory>${project.basedir}</workingDirectory>
+                                    <arguments>
+                                        <argument>/c</argument>
+                                        <argument>"${bash.local.path}"</argument>
+                                        <argument>${project.basedir}/${docker.build.script}</argument>
+                                        <argument>ctliv/${project.artifactId}</argument>
+                                        <argument>${project.version}</argument>
+                                        <argument>${docker.build.options}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>dev</id>
+
+<!--        Disabled due to: https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.devtools.diagnosing-classloading-issues
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                    <scope>runtime</scope>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+-->
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-frontend</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Copied from: https://github.com/simasch/vaadin-create-testing -->
+        <profile>
+            <id>it</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-frontend</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>start-spring-boot</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>stop-spring-boot</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Runs the integration tests (*IT) after the server is started -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <trimStackTrace>false</trimStackTrace>
+                            <enableAssertions>true</enableAssertions>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                                <configuration>
+                                    <destFile>${project.build.directory}/jacoco-ut.exec</destFile>
+                                    <includes>
+                                        <include>io.github.ctliv.*</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>pre-integration-prepare</id>
+                                <goals>
+                                    <goal>prepare-agent-integration</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>report</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>merge</goal>
+                                </goals>
+                                <configuration>
+                                    <fileSets>
+                                        <fileSet>
+                                            <directory>${project.build.directory}</directory>
+                                            <includes>
+                                                <include>*.exec</include>
+                                            </includes>
+                                        </fileSet>
+                                    </fileSets>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>merged-report-generation</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <!-- Production mode is activated using -Pproduction -->
+            <id>production</id>
+
+            <dependencies>
+                <dependency>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>vaadin-core</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.vaadin</groupId>
+                            <artifactId>vaadin-dev</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>vaadin-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-frontend</goal>
+                                    <goal>build-frontend</goal>
+                                </goals>
+                                <phase>compile</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- See: https://stackoverflow.com/questions/76636685/some-vaadin-components-not-rendered-after-upgrading-from-v22-to-v24 -->
+                            <optimizeBundle>false</optimizeBundle>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
