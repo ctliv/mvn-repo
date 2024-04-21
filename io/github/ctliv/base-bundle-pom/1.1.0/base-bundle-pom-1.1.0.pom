@@ -56,7 +56,7 @@
                             -->
                             <!-- See: https://maven.apache.org/plugins/maven-deploy-plugin/deploy-mojo.html#altDeploymentRepository -->
                             <altDeploymentRepository>
-                                internal.repo::default::file://${project.build.directory}/mvn-artifact
+                                internal.repo::file://${project.build.directory}/mvn-artifact
                             </altDeploymentRepository>
                         </configuration>
                     </plugin>
