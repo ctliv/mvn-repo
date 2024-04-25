@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>terminal-mod</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>io.github.ctliv</groupId>
+        <artifactId>base-mod-pom</artifactId>
+        <version>1.1.0</version>
+        <relativePath/>
+    </parent>
+
+    <repositories>
+        <repository>
+            <id>in-project</id>
+            <name>In Project Repo</name>
+            <url>file://${project.basedir}/localRepo</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- https://reflectoring.io/comparison-of-java-http-clients/
+     https://reflectoring.io/spring-webclient/
+     https://howtodoinjava.com/spring/spring-restclient/ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <!-- See also: https://www.baeldung.com/springdoc-openapi-form-login-and-basic-authentication
+                        https://simplesolution.dev/spring-boot-rest-api-openapi-swagger-ui-springdoc-openapi/ -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <!-- https://www.hxtt.com/cobol.html
+             http://www.hxtt.com/hibernate.html -->
+        <dependency>
+            <groupId>hxtt</groupId>
+            <artifactId>hxtt-cobol-jdbc</artifactId>
+            <version>4.3</version>
+        </dependency>
+<!--
+        <dependency>
+            <groupId>hxtt</groupId>
+            <artifactId>hxtt-hibernate</artifactId>
+            <version>6.0</version>
+        </dependency>
+-->
+
+        <!-- https://vaadin.com/directory/component/barcode-scanner -->
+        <dependency>
+            <groupId>sk.smartbase.component</groupId>
+            <artifactId>barcode-scanner</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.ctliv</groupId>
+            <artifactId>base-mod</artifactId>
+        </dependency>
+    </dependencies>
+</project>
