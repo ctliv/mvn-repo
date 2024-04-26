@@ -19,7 +19,7 @@
         <repository>
             <id>in-project</id>
             <name>In Project Repo</name>
-            <url>file://${project.basedir}/localRepo</url>
+            <url>file://${project.basedir}/../localRepo</url>
         </repository>
     </repositories>
 
