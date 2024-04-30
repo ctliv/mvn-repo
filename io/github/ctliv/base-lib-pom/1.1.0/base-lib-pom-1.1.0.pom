@@ -258,19 +258,6 @@
                 <artifactId>auth-mod</artifactId>
                 <version>1.0.0</version>
             </dependency>
-
-            <dependency>
-                <groupId>io.github.ctliv</groupId>
-                <artifactId>edifact-mod</artifactId>
-                <version>1.0.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.ctliv</groupId>
-                <artifactId>terminal-mod</artifactId>
-                <version>1.0.0</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -329,6 +316,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
+                    <!-- Cannot bump due to mishandling of pathnames with spaces -->
                     <version>3.0.0</version>
                 </plugin>
                 <plugin>
