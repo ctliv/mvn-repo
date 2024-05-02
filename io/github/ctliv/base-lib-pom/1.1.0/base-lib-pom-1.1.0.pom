@@ -244,19 +244,25 @@
             <dependency>
                 <groupId>io.github.ctliv</groupId>
                 <artifactId>base-lib</artifactId>
-                <version>1.0.0</version>
+                <version>1.1.0</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.ctliv</groupId>
                 <artifactId>base-mod</artifactId>
-                <version>1.0.0</version>
+                <version>1.1.0</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.ctliv</groupId>
                 <artifactId>auth-mod</artifactId>
-                <version>1.0.0</version>
+                <version>1.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.ctliv</groupId>
+                <artifactId>noauth-mod</artifactId>
+                <version>1.1.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
